@@ -23,6 +23,25 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+app.patch("/update-user", async (req, res) => {
+  let { id, score } = req.body;
+  let user = await User.findOneAndUpdate({ _id: id }, { score });
+  if (user) {
+    return res.send({ status: true, messege: "score updated successfully" });
+  } else {
+    return res.send({ status: false, messege: "wrong details" });
+  }
+});
+
+app.get("/all-user", async (req, res) => {
+  let user = await User.find();
+  if (user) {
+    return res.send({ status: true, data: user });
+  } else {
+    return res.send({ status: false, messege: "wrong details" });
+  }
+});
+
 
 
 module.exports = app;
