@@ -34,7 +34,7 @@ app.patch("/update-user", async (req, res) => {
 });
 
 app.get("/all-user", async (req, res) => {
-  let user = await User.find();
+  let user = await User.find().sort({score:-1});
   if (user) {
     return res.send({ status: true, data: user });
   } else {
